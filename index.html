@@ -1,19 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gordon Montgomery - Resume</title>
+    <title>Gordon Montgomery | Digital Design & AI Implementation</title>
 
-    <!-- Tailwind CSS CDN - Ensure this is loaded before your custom config and styles -->
+    <meta name="description" content="Dual-degree Computer Science & Business student at UW. Specialized in Front-End Development, Digital Design, and AI Prompt Engineering. Pursuing roles in AI Implementation and Information Systems." />
+    <meta name="keywords" content="Gordon Montgomery, Front End Developer, AI Prompt Engineer, Digital Design, Information Systems, CS and Business Dual Degree, Python, UI/UX" />
+    <meta name="author" content="Gordon Montgomery" />
+
+    <meta property="og:title" content="Gordon Montgomery | Digital Design & AI Portfolio" />
+    <meta property="og:description" content="Explore the intersection of CS and Business. Expert in Front-End development and emerging AI workflows." />
+    <meta property="og:type" content="website" />
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      // IMPORTANT: This inline script PREVENTS FOUC (Flash of Unstyled Content)
-      // It applies the theme from localStorage or system preference immediately.
       (function () {
         const savedTheme = localStorage.getItem('theme');
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
         if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
           document.documentElement.classList.add('dark');
         } else {
@@ -21,13 +23,11 @@
         }
       })();
 
-      // Tailwind Config - This makes the 'dark:' variant available.
-      // For CDN, you configure it like this:
       tailwind.config = {
-        darkMode: 'class', // Ensures Tailwind's dark: variant works by looking for the 'dark' class on HTML
+        darkMode: 'class',
         theme: {
           extend: {
-            // Extend Tailwind's default theme here if needed for custom animations or colors.
+            // Ready for custom AI/Tech branding colors if needed later
           },
         },
       };
@@ -45,38 +45,33 @@
       }
       body {
         font-family: 'Inter', sans-serif;
-        /*
-          Explicitly setting body background to handle potential conflicts.
-          This ensures the area around the resume card changes with the theme.
-        */
-        background-color: #f3f4f6; /* Tailwind's bg-gray-100 */
-        transition: background-color 0.3s ease-in-out; /* Smooth transition for background */
+        background-color: #f3f4f6;
+        transition: background-color 0.3s ease-in-out;
       }
-      /* When HTML has 'dark' class, apply the dark background to body */
       html.dark body {
-        background-color: #1f2937; /* Tailwind's bg-gray-900 */
+        background-color: #1f2937;
       }
-
-      /* Custom styles for the resume container (card) */
       .resume-container {
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        box-shadow:
+          0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
       }
-      /* Specific list style for skills */
       .skills-list li {
         position: relative;
-        padding-left: 1.5em; /* Space for the bullet/icon */
+        padding-left: 1.5em;
       }
       .skills-list li::before {
-        content: '•'; /* Unicode bullet point */
-        color: #fbbf24; /* Tailwind yellow-400 */
+        content: '•';
+        color: #fbbf24;
         font-weight: bold;
         position: absolute;
         left: 0;
         top: 0;
       }
-      /* Smooth transition for SVG icons (opacity and transform for potential animations) */
       .theme-icon-transition {
-        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        transition:
+          opacity 0.3s ease-in-out,
+          transform 0.3s ease-in-out;
       }
     </style>
   </head>
@@ -182,7 +177,10 @@
           <div class="flex justify-center items-center mb-8">
             <img
               src="profile_pic.jpg"
-              onerror="this.onerror=null;this.src='https://placehold.co/128x128/FBBF24/2C2F36?text=GM';"
+              onerror="
+                this.onerror = null;
+                this.src = 'https://placehold.co/128x128/FBBF24/2C2F36?text=GM';
+              "
               alt="Gordon Montgomery"
               class="rounded-full w-32 h-32 object-cover object-top border-4 border-yellow-400"
             />
@@ -684,10 +682,10 @@
                   Developed and deployed a responsive business website using modern front-end build
                   tools including Webpack and Node.js for efficient development:
                   <a
-                    href="https://flashgordonplumbing.netlify.app/"
+                    href="https://flashgordonplumbing.com/"
                     target="_blank"
                     class="text-blue-600 hover:underline dark:text-blue-400"
-                    >https://flashgordonplumbing.netlify.app/</a
+                    >https://flashgordonplumbing.com/</a
                   >
                 </li>
                 <li>
