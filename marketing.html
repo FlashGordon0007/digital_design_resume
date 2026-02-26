@@ -762,5 +762,103 @@
         </div>
       </div>
     </div>
+
+    <!-- 🌗 Floating dark mode toggle (NOW VISIBLE ON ALL SCREEN SIZES) -->
+    <!-- Removed md:hidden to make it always visible -->
+    <div class="fixed bottom-4 right-4 z-50">
+      <button
+        id="floatingToggle"
+        class="bg-yellow-400 dark:bg-gray-800 text-black dark:text-yellow-300 p-3 rounded-full shadow-lg hover:scale-110 transition-transform duration-300"
+        aria-label="Toggle dark mode"
+      >
+        <svg
+          class="w-6 h-6 theme-icon-transition"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <!-- Sun Icon for floating button (shown in light mode) -->
+          <path
+            class="sun-icon-path"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 3v1m0 16v1m9-9h1M4 12H3m15.325 5.325l-.707.707M6.364 6.364l-.707-.707m12.728 0l-.707-.707M6.364 17.636l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+          />
+          <!-- Moon Icon for floating button (shown in dark mode) -->
+          <path
+            class="moon-icon-path hidden"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+          />
+        </svg>
+      </button>
+    </div>
+
+    <script>
+      // Get references to all toggle buttons
+      const desktopToggle = document.getElementById('desktopThemeToggle');
+      const floatingToggle = document.getElementById('floatingToggle'); // Now always visible
+
+      // Function to update the SVG icon paths based on the current theme
+      function updateIcons(isDark) {
+        const sunPaths = document.querySelectorAll('.sun-icon-path');
+        const moonPaths = document.querySelectorAll('.moon-icon-path');
+
+        if (isDark) {
+          sunPaths.forEach((path) => path.classList.add('hidden'));
+          moonPaths.forEach((path) => path.classList.remove('hidden'));
+        } else {
+          sunPaths.forEach((path) => path.classList.remove('hidden'));
+          moonPaths.forEach((path) => path.classList.add('hidden'));
+        }
+      }
+
+      // Function to apply the theme (update HTML class and localStorage)
+      function applyTheme(theme) {
+        const htmlElement = document.documentElement;
+        if (theme === 'dark') {
+          htmlElement.classList.add('dark');
+          localStorage.setItem('theme', 'dark');
+        } else {
+          htmlElement.classList.remove('dark');
+          localStorage.setItem('theme', 'light');
+        }
+        updateIcons(theme === 'dark'); // Update icons based on the new theme
+      }
+
+      // Function to toggle the theme
+      function toggleTheme() {
+        const currentThemeIsDark = document.documentElement.classList.contains('dark');
+        const newTheme = currentThemeIsDark ? 'light' : 'dark';
+        applyTheme(newTheme);
+      }
+
+      // Initialize theme on page load (this is redundant with the head script but harmless,
+      // and ensures icons are updated if the head script only sets the class)
+      // The head script already handles the FOUC. This part ensures the icons sync up.
+      const initialSavedTheme = localStorage.getItem('theme');
+      const prefersSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const initialTheme = initialSavedTheme || 'dark';
+      applyTheme(initialTheme); // Apply theme and update icons based on initial load
+
+      // Add event listeners to all remaining toggle buttons
+      if (desktopToggle) {
+        desktopToggle.addEventListener('click', toggleTheme);
+      }
+      if (floatingToggle) {
+        floatingToggle.addEventListener('click', toggleTheme);
+      }
+
+      // Listen for system theme changes (e.g., user changes OS theme)
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        // Only update if the user hasn't explicitly set a preference
+        if (!localStorage.getItem('theme')) {
+          applyTheme(e.matches ? 'dark' : 'light');
+        }
+      });
+    </script>
   </body>
 </html>
